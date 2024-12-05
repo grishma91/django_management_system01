@@ -1,0 +1,54 @@
+{% extends './Base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    {% block content %}
+    <br>
+    <br>
+    <h2><strong>Project Team</strong></h2> 
+    <h1 class="card-header">
+      <a class="btn btn-primary" href="{% url 'create_project_team' %}">   Add Team Member </a>
+    </h1>
+    <div class="table-responsive text-nowrap">
+      
+        <table class="table">
+          <thead>
+            <tr>
+              <th>PROJECT</th>
+              <th>USER</th>
+              <th>ACTION</th>
+            </tr>
+          </thead>
+          <tbody class="table-border-bottom-0">
+            
+          {% for team in project_team_list %}
+
+            <tr>
+              <td>{{team.Project}}</td>
+              <td>{{team.user}}</td>
+              <td class="dropdown">
+                   {% comment %} <a class="dropdown-item" href="{% url 'delete_project' project.id %}"> {% endcomment %}
+                    <button id="edit" class="btn btn-danger btn-sm" type="submit">DELETE</button>
+                   
+                    
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      
+
+    {% endblock content %}
+        
+    
+</body>
+</html>

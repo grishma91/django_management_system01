@@ -1,0 +1,169 @@
+{% comment %} {% extends 'base.html' %} {% endcomment %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Defect Tracking</title>
+  <link rel="stylesheet" href="{% static 'vendors/feather/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/ti-icons/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.base.css' %}">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="{% static 'vendors/datatables.net-bs4/dataTables.bootstrap4.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/ti-icons/css/themify-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'js/select.dataTables.min.css' %}">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="{% static 'css copy/vertical-layout-light/style.css' %}">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" />
+  
+</head>
+{% comment %} {% block content %} {% endcomment %}
+<body>
+  
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    
+      <nav class="navbar col-lg-0 col-0 p-0 fixed-top d-flex flex-row">
+          
+       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center"> 
+              {% comment %} for logo uploding {% endcomment %}
+           <a class="navbar-brand brand-logo mr-1" href="">
+            <img src="{% static 'images/MyLogo.png'%}" class="mr-2" alt="logo">
+              {% comment %} <a class="navbar-brand brand-logo-mini" href=""><img src="{% static 'images/MyLogo.png' %}" alt="logo"/></a> {% endcomment %}
+              
+            </div> 
+    </nav>
+    <!-- partial -->
+    <br>
+    <br>
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_settings-panel.html -->
+      
+      <div id="right-sidebar" class="settings-panel">
+      
+        </ul>
+        <div class="tab-content" id="setting-content">
+          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
+            <div class="add-items d-flex px-3 mb-0"> 
+            </div>
+            <div class="list-wrapper px-3">
+              
+            </div>
+            
+            <div class="events pt-4 px-3">
+              <div class="wrapper d-flex mb-2">
+                
+              </div>
+            
+            </div>
+            <div class="events pt-4 px-3">
+              <div class="wrapper d-flex mb-2">
+                <i class="ti-control-record text-primary mr-2"></i>
+               
+              </div>
+              
+            </div>
+          </div>
+          <!-- To do section tab ends -->
+          <!-- chat tab ends -->
+        </div>
+      </div>
+      
+      <!-- partial -->
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+      <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link"href="{% url 'managerpage' %}">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">HOME</span>
+            </a>
+          </li>
+          <br>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contactus' %}">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">CONTACT US</span>
+            </a>
+          </li>
+          <br>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'aboutus' %}">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">ABOUT US</span>
+            </a>
+          </li>
+          <br>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">LOG OUT</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- partial -->
+      
+      <div class="main-panel">
+       
+        <div class="content-wrapper"> 
+        <center><h2> MANAGER SPLASHBOARD <h2></center>
+          <br>
+          <div class="col-12 grid-margin stretch-card">
+            
+          <div class="card">
+            <br>
+            
+        <h3 class="card-header">PROJECTS</h3>
+        
+      <h1 class="card-header">
+      <a class="btn btn-primary" href="{% url 'create_project' %}">ADD NEW PROJECT</a>  
+      </h1>
+      <div class="table-responsive text-nowrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>PROJECT</th>
+              <th>DESCRIPTION</th>
+              <th>TECHNOLOGY</th>
+              <th>STATUS</th>
+              <th>ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody class="table-border-bottom-0">
+            {% for project in projects %}
+            <tr>
+              <td>
+                <i class="fab fa-angular fa-lg text-danger me-3"></i>
+                <strong>{{project.title}}</strong>
+              </td>
+              <td>{{project.description}}</td>
+              <td>{{project.technology}}</td>
+              <td><span class="badge bg-label-success me-1">{{project.status}}</span></td>
+              
+              <td>
+                <div class="dropdown">
+                 <a class="dropdown-item" href="{% url 'update_project' project.id %}">
+                    <button id="edit" class="btn btn-success btn-sm" type="submit">EDIT</button>
+                   <a class="dropdown-item" href="{% url 'delete_project' project.id %}">
+                    <button id="edit" class="btn btn-danger btn-sm" type="submit">DELETE</button>
+                  <a class="dropdown-item" href="{% url 'project_team_list' %}">
+                    <button id="edit" class="btn btn-info btn-sm" type="submit">ADD TEAM MEMBER</button>
+                   <a class="dropdown-item" href="{% url 'detail_project' project.id %}">
+                    <button id="edit" class="btn btn-warning btn-sm" type="submit">Detail </button>
+                </div>
+              </td>
+            </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
